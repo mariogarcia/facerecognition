@@ -1,0 +1,7 @@
+build/
+*.class
+*.bat
+.gradle/
+gradle/
+gradlew
+gradlew*.*

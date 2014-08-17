@@ -1,0 +1,20 @@
+apply plugin: 'groovy'
+
+repositories {
+    mavenCentral()
+    maven {
+        url 'http://maven.openimaj.org/'
+    }
+}
+
+dependencies {
+    compile 'org.codehaus.groovy:groovy:2.2.2'
+    compile 'org.openimaj:core-image:1.1'
+    compile 'org.openimaj:image-local-features:1.1'
+    compile 'org.openimaj.tools:LocalFeaturesTool:1.1'
+    compile 'org.openimaj:faces:1.1'
+    compile 'org.openimaj:core-video-capture:1.1'
+
+    testCompile 'org.spockframework:spock-core:0.7-groovy-2.0'
+    testCompile 'junit:junit:4.11'
+}
