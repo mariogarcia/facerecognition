@@ -6,6 +6,7 @@ import org.openimaj.math.geometry.shape.*
 import org.openimaj.image.*
 import org.openimaj.image.colour.*
 import org.openimaj.image.model.*
+import org.openimaj.feature.*
 import org.openimaj.image.feature.local.engine.*
 import org.openimaj.image.processing.alignment.*
 import org.openimaj.image.processing.edges.*
@@ -51,15 +52,17 @@ void doImageProcessing() {
             faceRecognizer);
 
     // Start loop
-    video = new VideoCapture(320,240)
-    display = VideoDisplay.createVideoDisplay(video)
+    def video = new VideoCapture(320,240)
+    def display = VideoDisplay.createVideoDisplay(video)
 
     video.each { MBFImage fimg ->
 
-        List<KEDetectedFace> faces = faceEngine.getDetector().detectFaces(fimg);
+        List<KEDetectedFace> faces = faceEngine.getDetector().detectFaces(fimg.flattenMax());
 
         // Go through detected faces
         for (KEDetectedFace face : faces) {
+
+            println faces.size()
 
             // Find existing person for this face
             Person person = null;
@@ -81,7 +84,7 @@ void doImageProcessing() {
 
                 // Create person
                 person = new Person();
-                System.out.println("Identified new person: " + person.getIdentifier());
+                println("Identified new person: " + person.getIdentifier());
 
                 // Train engine to recognize this new person
                 faceEngine.train(person, face.getFacePatch());
@@ -89,7 +92,7 @@ void doImageProcessing() {
             } else {
 
                 // This person has been detected before
-                System.out.println("Identified existing person: " + person.getIdentifier());
+                println("Identified existing person: " + person.getIdentifier());
 
             }
 
@@ -98,6 +101,10 @@ void doImageProcessing() {
     }
 
 }
+
+    static void main(String[] args) {
+        new VideoCapturePoc().doImageProcessing()
+    }
 
 }
 
