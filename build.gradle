@@ -19,8 +19,18 @@ dependencies {
     testCompile 'junit:junit:4.11'
 }
 
-task videoProcessing(type: JavaExec) {
+task simple(type: JavaExec) {
     classpath = sourceSets.main.runtimeClasspath
-    main = 'capture.VideoCapturePoc'
+    main = 'capture.SimpleFaceDetection'
+}
+
+task medium(type: JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+    main = 'capture.MediumFaceDetection'
+}
+
+task advanced(type: JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+    main = 'capture.AdvancedFaceDetection'
 }
 
